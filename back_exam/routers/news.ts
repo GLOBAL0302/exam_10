@@ -3,6 +3,7 @@ import mysqlDB from '../mysqlDb';
 import{ResultSetHeader} from 'mysql2';
 import mysqlDb from '../mysqlDb';
 import { IComments, INews } from '../types';
+import { imagesUpload } from '../multer';
 
 const newsRouter = express.Router();
 
@@ -30,7 +31,7 @@ newsRouter.get("/:id", async (req, res)=>{
   return res.send(news[0]);
 })
 
-newsRouter.post("/", async (req, res)=>{
+newsRouter.post("/", imagesUpload.single("image"), async (req, res)=>{
   if(!req.body.title || !req.body.description){
     return res.status(404).send({error:"there is no title or description"});
   }
@@ -38,8 +39,9 @@ newsRouter.post("/", async (req, res)=>{
   const newReport = {
     title:req.body.title,
     description:req.body.description,
-    image:req.body.image? req.body.image : "",
+    image:req.body.file ? req.body.filename : null,
   }
+
 
   const insertResult = await mysqlDb
     .getConnection()
@@ -58,14 +60,6 @@ newsRouter.post("/", async (req, res)=>{
 newsRouter.delete("/:id", async (req, res)=>{
   const id = req.params.id;
   await mysqlDB.getConnection().query('DELETE FROM comments WHERE news_id = ?',[id]);
-
-  // const id = req.params.id;
-  // const result = await mysqlDB.getConnection().query('SELECT * FROM comments WHERE id=?',[id]);
-  // const news_id = result[0] as IComments[]
-  // if(news_id[0]){
-  //   return  res.status(404).send({error:"can not delete bound data"})
-  // }
-
   const deleted = await mysqlDb
     .getConnection()
     .query('DELETE FROM news WHERE id=?',[id])

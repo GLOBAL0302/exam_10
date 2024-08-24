@@ -38,6 +38,7 @@ const FileInput:React.FC<Props> = ({onChange, name}) => {
           aria-label="Recipient's username"
           aria-describedby="basic-addon2"/>
         <button
+          type="button"
           className="input-group-text"
           id="basic-addon2"
           onClick={activateInput}

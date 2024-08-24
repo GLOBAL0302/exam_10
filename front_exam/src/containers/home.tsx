@@ -6,6 +6,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
 import AddNews from '../components/AddNews/AddNews.tsx';
+import News from '../features/News/News.tsx';
 
 
 const Home = () => {
@@ -47,6 +48,7 @@ const Home = () => {
           <AddNews onClose={handleClose}/>
         </DialogContent>
       </Dialog>
+      <News/>
     </>
   );
 };

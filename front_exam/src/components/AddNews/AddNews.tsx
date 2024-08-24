@@ -2,6 +2,9 @@ import {useState } from 'react';
 import { newsMutation } from '../../types';
 import FileInput from '../../UI/FileInput';
 import { Button, Grid, TextField } from '@mui/material';
+import { useAppDispatch } from '../../app/hooks.ts';
+import { addNews } from '../../features/News/NewsThunk.ts';
+
 
 interface Props {
   onClose:()=> void;
@@ -14,9 +17,9 @@ const initialState:newsMutation = {
 }
 
 const AddNews:React.FC<Props> = ({onClose}) => {
+  const dispatch = useAppDispatch();
+
   const [newsMutation, setNewsMutation] = useState(initialState);
-
-
   const inputChangeHandler = (event:React.ChangeEvent<HTMLInputElement>)=>{
     const {name, value} = event.target;
     setNewsMutation((prevState)=>({
@@ -37,7 +40,7 @@ const AddNews:React.FC<Props> = ({onClose}) => {
 
   const onClickSubmit = (event:React.FormEvent<HTMLFormElement>)=>{
     event.preventDefault();
-    console.log(newsMutation);
+    dispatch(addNews(newsMutation));
   }
 
 
