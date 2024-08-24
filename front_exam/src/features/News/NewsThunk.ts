@@ -2,9 +2,6 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { IApiNews, newsMutation } from '../../types.ts';
 import axiosApi from '../../axiosApi.ts';
 
-
-
-
 export const fetchNewsThunk = createAsyncThunk<IApiNews[]>(
   "fetchNewsThunk",
   async()=>{
@@ -12,7 +9,6 @@ export const fetchNewsThunk = createAsyncThunk<IApiNews[]>(
     return data
   }
 )
-
 
 export const addNews = createAsyncThunk<void, newsMutation>(
   "addNews",
@@ -25,5 +21,12 @@ export const addNews = createAsyncThunk<void, newsMutation>(
       formData.append("image", item.image);
     }
     await axiosApi.post("/news", formData)
+  }
+)
+
+export const deleteNews = createAsyncThunk<void, number>(
+  "deleteNews",
+  async(id)=>{
+    await axiosApi.delete(`/news/${id}`)
   }
 )

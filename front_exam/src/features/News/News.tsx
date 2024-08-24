@@ -1,7 +1,8 @@
 import { useAppDispatch, useAppSelector } from '../../app/hooks.ts';
-import { useEffect } from 'react';
+import {useEffect } from 'react';
 import { fetchNewsThunk } from './NewsThunk.ts';
 import { selectAllNews, selectFetchingNews } from './NewsSlice.ts';
+import NewsItem from './NewsItem.tsx';
 
 
 const News = () => {
@@ -12,11 +13,11 @@ const News = () => {
 
   useEffect(() => {
     dispatch(fetchNewsThunk())
-  }, [dispatch]);
+  }, [dispatch, selectNews]);
 
   return (
     <>
-      {selectNews.map(item=>(<News key={item.id} item={item}/>))}
+      {selectNews.map(item=>(<NewsItem key={item.id} item={item}/>))}
     </>
   );
 };
