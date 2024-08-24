@@ -5,10 +5,10 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
-import AddNews from '../components/AddNews/AddNews.tsx';
-import News from '../features/News/News.tsx';
-import { useAppDispatch } from '../app/hooks.ts';
-import { fetchNewsThunk } from '../features/News/NewsThunk.ts';
+import AddNews from '../components/AddNews/AddNews';
+import News from '../features/News/News';
+import { useAppDispatch } from '../app/hooks';
+import { fetchNewsThunk } from '../features/News/NewsThunk';
 
 
 const Home = () => {
@@ -22,14 +22,14 @@ const Home = () => {
     setOpenModal(true);
   };
 
-  const handleClose = async () => {
+  const handleClose = () =>{
     setOpenModal(false);
-    await dispatch(fetchNewsThunk())
+    dispatch(fetchNewsThunk())
   };
 
   return (
     <>
-    <Grid container spacing={2} display="flex" alignItems="center" justifyContent="center">
+    <Grid container spacing={2} display="flex" alignItems="center" justifyContent="center" marginBottom={2}>
       <Grid item component="div">
         <Typography variant="h6" component="h6">POSTS</Typography>
       </Grid>
