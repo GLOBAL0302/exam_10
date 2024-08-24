@@ -10,7 +10,6 @@ import News from '../features/News/News';
 import { useAppDispatch } from '../app/hooks';
 import { fetchNewsThunk } from '../features/News/NewsThunk';
 
-
 const Home = () => {
   const dispatch = useAppDispatch();
   const [openModal, setOpenModal] = useState(false);
@@ -22,37 +21,32 @@ const Home = () => {
     setOpenModal(true);
   };
 
-  const handleClose = () =>{
+  const handleClose = () => {
     setOpenModal(false);
-    dispatch(fetchNewsThunk())
+    dispatch(fetchNewsThunk());
   };
 
   return (
     <>
-    <Grid container spacing={2} display="flex" alignItems="center" justifyContent="center" marginBottom={2}>
-      <Grid item component="div">
-        <Typography variant="h6" component="h6">POSTS</Typography>
+      <Grid container spacing={2} display="flex" alignItems="center" justifyContent="center" marginBottom={2}>
+        <Grid item component="div">
+          <Typography variant="h6" component="h6">
+            POSTS
+          </Typography>
+        </Grid>
+        <Grid item sx={{ marginLeft: 'auto' }}>
+          <Button onClick={handleClickOpen} variant="contained">
+            Add news
+          </Button>
+        </Grid>
       </Grid>
-      <Grid item sx={{marginLeft:"auto"}}>
-        <Button
-          onClick={handleClickOpen}
-          variant="contained" >Add news</Button>
-      </Grid>
-    </Grid>
-      <Dialog
-        fullScreen={fullScreen}
-        open={openModal}
-        onClose={handleClose}
-        aria-labelledby="responsive-dialog-title"
-      >
-        <DialogTitle id="responsive-dialog-title">
-          {"Add news"}
-        </DialogTitle>
+      <Dialog fullScreen={fullScreen} open={openModal} onClose={handleClose} aria-labelledby="responsive-dialog-title">
+        <DialogTitle id="responsive-dialog-title">{'Add news'}</DialogTitle>
         <DialogContent>
-          <AddNews onClose={handleClose}/>
+          <AddNews onClose={handleClose} />
         </DialogContent>
       </Dialog>
-      <News/>
+      <News />
     </>
   );
 };
