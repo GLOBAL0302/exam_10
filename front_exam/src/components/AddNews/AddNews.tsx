@@ -45,8 +45,9 @@ const AddNews:React.FC<Props> = ({onClose}) => {
 
 
   return (
-      <Grid container spacing={2} component="form" onSubmit={onClickSubmit}>
+      <Grid container padding={4} spacing={2} component="form" onSubmit={onClickSubmit}>
         <Grid
+
           width="100%"
           item>
           <TextField

@@ -7,9 +7,12 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
 import AddNews from '../components/AddNews/AddNews.tsx';
 import News from '../features/News/News.tsx';
+import { useAppDispatch } from '../app/hooks.ts';
+import { fetchNewsThunk } from '../features/News/NewsThunk.ts';
 
 
 const Home = () => {
+  const dispatch = useAppDispatch();
   const [openModal, setOpenModal] = useState(false);
 
   const theme = useTheme();
@@ -19,8 +22,9 @@ const Home = () => {
     setOpenModal(true);
   };
 
-  const handleClose = () => {
+  const handleClose = async () => {
     setOpenModal(false);
+    await dispatch(fetchNewsThunk())
   };
 
   return (
