@@ -12,3 +12,5 @@ export interface IComments{
   author:string,
   description:string,
 }
+
+export type ICommentMutation = Omit<IComments, 'id'>;

@@ -3,6 +3,7 @@ import config from "./config";
 import cors from "cors";
 import newsRouter from './routers/news';
 import mysqlDB from './mysqlDb';
+import commentsRouter from './routers/comments';
 
 
 const app = express();
@@ -12,6 +13,7 @@ app.use(cors(config.corsOptions));
 app.use(express.json());
 app.use(express.static("public"));
 app.use("/news", newsRouter);
+app.use("/comments", commentsRouter);
 
 
 const run = async()=>{
