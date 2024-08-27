@@ -17,7 +17,7 @@ const FileInput: React.FC<Props> = ({ onChange, name }) => {
 
   const onFileChange = (event: ChangeEvent<HTMLInputElement>) => {
     if (event.target.files && event.target.files[0]) {
-      setFileName(event.target.files[0].name);
+        setFileName(event.target.files[0].name);
     } else {
       setFileName('');
     }

@@ -3,7 +3,7 @@ import { newsMutation } from '../../types';
 import FileInput from '../../UI/FileInput';
 import { Button, Grid, TextField } from '@mui/material';
 import { useAppDispatch } from '../../app/hooks.ts';
-import { addNews } from '../../features/News/NewsThunk.ts';
+import {addNews, fetchNewsThunk} from '../../features/News/NewsThunk.ts';
 
 interface Props {
   onClose: () => void;
@@ -37,9 +37,10 @@ const AddNews: React.FC<Props> = ({ onClose }) => {
     }));
   };
 
-  const onClickSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const onClickSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    dispatch(addNews(newsMutation));
+    await dispatch(addNews(newsMutation));
+    await dispatch(fetchNewsThunk());
   };
 
   return (

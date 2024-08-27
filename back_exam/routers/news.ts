@@ -34,7 +34,7 @@ newsRouter.post('/', imagesUpload.single('image'), async (req, res) => {
   const newReport = {
     title: req.body.title,
     description: req.body.description,
-    image: req.body.file ? req.body.filename : null,
+    image: req.file ? req.file.filename : null,
   };
 
   const insertResult = await mysqlDb
